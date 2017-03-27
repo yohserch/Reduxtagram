@@ -1,12 +1,3 @@
-function comments(state = [], action) {
-	if(typeof action.postId !== 'undefined') {
-		return {
-			...state,
-			[action.postId]: postComments(state[action.postId], action)
-		}
-	}
-}
-
 function postComments(state = [], action) {
 	switch(action.type) {
 		case 'ADD_COMMENT':
@@ -22,6 +13,16 @@ function postComments(state = [], action) {
 		default:
 			return state;
 	}
+}
+
+function comments(state = [], action) {
+	if(typeof action.postId !== 'undefined') {
+		return {
+			...state,
+			[action.postId]: postComments(state[action.postId], action)
+		}
+	}
+	return state;
 }
 
 export default comments;
